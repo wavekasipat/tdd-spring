@@ -10,7 +10,6 @@ public class UserController {
   @GetMapping("/user/{id}")
   public UserResponse getById(@PathVariable int id) {
     if (id == 2) {
-      // throw new RuntimeException("User id" + id + "not found");
       throw new UserNotFoundException(id);
     }
     UserResponse userResponse = new UserResponse();
