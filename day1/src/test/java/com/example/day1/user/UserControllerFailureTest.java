@@ -3,6 +3,7 @@ package com.example.day1.user;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.example.day1.global.ErrorResponse;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +19,7 @@ class UserControllerFailureTest {
   private TestRestTemplate restTemplate;
 
   @Test
+  @DisplayName("Failure - Get user by id 2 - return 404 not found")
   void getByIdNotFound() {
     ResponseEntity<ErrorResponse> errorResponse = restTemplate.getForEntity(
       "/user/2",
@@ -28,6 +30,7 @@ class UserControllerFailureTest {
   }
 
   @Test
+  @DisplayName("Failure - Get user by id invalid - return 400 bad request")
   void getByIdInvalid() {
     ResponseEntity<ErrorResponse> errorResponse = restTemplate.getForEntity(
       "/user/invalid",
