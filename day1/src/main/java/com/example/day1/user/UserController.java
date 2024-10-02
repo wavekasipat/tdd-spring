@@ -7,15 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
+  private final UserService userService;
+
+  public UserController(UserService userService) {
+    this.userService = userService;
+  }
+
   @GetMapping("/user/{id}")
   public UserResponse getById(@PathVariable int id) {
-    if (id == 2) {
-      throw new UserNotFoundException(id);
-    }
-    UserResponse userResponse = new UserResponse();
-    userResponse.setId(id);
-    userResponse.setFname("John");
-    userResponse.setLname("Doe");
-    return userResponse;
+    return userService.get(id);
   }
 }
