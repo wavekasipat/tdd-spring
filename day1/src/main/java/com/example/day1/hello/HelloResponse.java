@@ -1,21 +1,25 @@
 package com.example.day1.hello;
 
-public class HelloResponse{
-	private String message;
+public class HelloResponse {
 
-	public void setMessage(String message){
-		this.message = message;
-	}
+  private String message;
 
-	public String getMessage(){
-		return message;
-	}
+  public HelloResponse() {}
 
-	@Override
- 	public String toString(){
-		return 
-			"HelloResponse{" + 
-			"message = '" + message + '\'' + 
-			"}";
-		}
+  public HelloResponse(String message) {
+    this.message = message;
+  }
+
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  public String getMessage() {
+    return message;
+  }
+
+  @Override
+  public String toString() {
+    return "HelloResponse{" + "message = '" + message + '\'' + "}";
+  }
 }
