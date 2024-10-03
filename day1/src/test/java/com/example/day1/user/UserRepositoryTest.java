@@ -23,8 +23,10 @@ class UserRepositoryTest {
     dummy.setFirstName("John");
     dummy.setLastName("Doe");
     userRepository.saveAndFlush(dummy);
+
     // Act
     Optional<MyUser> user = userRepository.findById(1L);
+
     // Assert
     assertEquals(1, user.get().getId());
     assertEquals("John", user.get().getFirstName());

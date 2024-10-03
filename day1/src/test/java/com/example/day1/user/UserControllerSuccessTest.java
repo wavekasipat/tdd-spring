@@ -27,11 +27,13 @@ class UserControllerSuccessTest {
     dummy.setFirstName("John");
     dummy.setLastName("Doe");
     userRepository.saveAndFlush(dummy);
+
     // Act
     UserResponse userResponse = restTemplate.getForObject(
       "/user/1",
       UserResponse.class
     );
+
     // Assert
     assertEquals("John", userResponse.getFname());
     assertEquals("Doe", userResponse.getLname());

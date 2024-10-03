@@ -26,8 +26,10 @@ class UserServiceTest {
     dummy.setFirstName("John");
     dummy.setLastName("Doe");
     userRepository.saveAndFlush(dummy);
+
     // Act
     UserResponse userResponse = userService.get(1);
+
     // Assert
     assertEquals(1, userResponse.getId());
     assertEquals("John", userResponse.getFname());
