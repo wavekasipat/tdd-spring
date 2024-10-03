@@ -17,9 +17,8 @@ public class HelloResponse {
   public String getMessage() {
     return message;
   }
-
-  @Override
-  public String toString() {
-    return "HelloResponse{" + "message = '" + message + '\'' + "}";
-  }
+  //  @Override
+  //  public String toString() {
+  //    return "HelloResponse{" + "message = '" + message + '\'' + "}";
+  //  }
 }

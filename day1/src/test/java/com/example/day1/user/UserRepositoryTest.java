@@ -22,6 +22,7 @@ class UserRepositoryTest {
     dummy.setId(1L);
     dummy.setFirstName("John");
     dummy.setLastName("Doe");
+    dummy.setAge(30);
     userRepository.saveAndFlush(dummy);
 
     // Act
@@ -30,5 +31,7 @@ class UserRepositoryTest {
     // Assert
     assertEquals(1, user.get().getId());
     assertEquals("John", user.get().getFirstName());
+    assertEquals("Doe", user.get().getLastName());
+    assertEquals(30, user.get().getAge());
   }
 }
