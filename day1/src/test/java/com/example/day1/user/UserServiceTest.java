@@ -14,9 +14,18 @@ class UserServiceTest {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @Test
   @DisplayName("Success - get UserService")
   void get() {
+    // Arrange
+    MyUser dummy = new MyUser();
+    dummy.setId(1L);
+    dummy.setFirstName("John");
+    dummy.setLastName("Doe");
+    userRepository.saveAndFlush(dummy);
     // Act
     UserResponse userResponse = userService.get(1);
     // Assert

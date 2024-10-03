@@ -1,18 +1,24 @@
 package com.example.day1.user;
 
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
 
+  @Autowired
+  private UserRepository userRepository;
+
   public UserResponse get(int id) {
-    if (id == 2) {
+    Optional<MyUser> user = userRepository.findById((long) id);
+    if (user.isEmpty()) {
       throw new UserNotFoundException(id);
     }
     UserResponse userResponse = new UserResponse();
     userResponse.setId(id);
-    userResponse.setFname("John");
-    userResponse.setLname("Doe");
+    userResponse.setFname(user.get().getFirstName());
+    userResponse.setLname(user.get().getLastName());
     return userResponse;
   }
 }

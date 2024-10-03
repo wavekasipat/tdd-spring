@@ -1,6 +1,7 @@
 package com.example.day1.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,24 @@ class UserControllerSuccessTest {
   @Autowired
   private TestRestTemplate restTemplate;
 
+  @Autowired
+  private UserRepository userRepository;
+
   @Test
   @DisplayName("Sucess - Get User by Id")
   void getById() {
+    // Arrange
+    MyUser dummy = new MyUser();
+    dummy.setId(1L);
+    dummy.setFirstName("John");
+    dummy.setLastName("Doe");
+    userRepository.saveAndFlush(dummy);
+    // Act
     UserResponse userResponse = restTemplate.getForObject(
       "/user/1",
       UserResponse.class
     );
+    // Assert
     assertEquals("John", userResponse.getFname());
     assertEquals("Doe", userResponse.getLname());
     assertEquals(1, userResponse.getId());
