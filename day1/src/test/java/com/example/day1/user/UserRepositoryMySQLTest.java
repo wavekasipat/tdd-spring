@@ -1,6 +1,7 @@
 package com.example.day1.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -55,5 +56,16 @@ class UserRepositoryMySQLTest {
     // Assert
     assertEquals(1, result.get().getId());
     assertEquals("Somkiat", result.get().getFirstName());
+  }
+
+  @Test
+  public void case02() {
+    // Arrange
+
+    // Act
+    Optional<MyUser> result = userRepository.findById(2L);
+
+    // Assert
+    assertTrue(result.isEmpty());
   }
 }

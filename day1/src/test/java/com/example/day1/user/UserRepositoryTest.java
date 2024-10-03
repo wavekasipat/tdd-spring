@@ -34,4 +34,16 @@ class UserRepositoryTest {
     assertEquals("Doe", user.get().getLastName());
     assertEquals(30, user.get().getAge());
   }
+
+  @Test
+  @DisplayName("Not found user id 2")
+  public void notFoundData() {
+    // Arrange
+
+    // Act
+    Optional<MyUser> user = userRepository.findById(2L);
+
+    // Assert
+    assertTrue(user.isEmpty());
+  }
 }
