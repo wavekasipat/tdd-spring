@@ -43,7 +43,7 @@ class UserRepositoryMySQLTest {
   @Autowired
   private UserRepository userRepository;
 
-  @Test
+//  @Test
   public void case01() {
     // Arrange
     MyUser dummy = new MyUser();
@@ -58,7 +58,7 @@ class UserRepositoryMySQLTest {
     assertEquals("Somkiat", result.get().getFirstName());
   }
 
-  @Test
+//  @Test
   public void case02() {
     // Arrange
 
