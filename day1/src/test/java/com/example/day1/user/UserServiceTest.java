@@ -2,7 +2,6 @@ package com.example.day1.user;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +22,16 @@ class UserServiceTest {
   void get() {
     // Arrange
     MyUser dummy = new MyUser();
-    dummy.setId(1L);
     dummy.setFirstName("John");
     dummy.setLastName("Doe");
-    userRepository.saveAndFlush(dummy);
+    dummy = userRepository.saveAndFlush(dummy);
+    int dummyId = Math.toIntExact(dummy.getId());
 
     // Act
-    UserResponse userResponse = userService.get(1);
+    UserResponse userResponse = userService.get(dummyId);
 
     // Assert
-    assertEquals(1, userResponse.getId());
+    assertEquals(dummyId, userResponse.getId());
     assertEquals("John", userResponse.getFname());
     assertEquals("Doe", userResponse.getLname());
   }
