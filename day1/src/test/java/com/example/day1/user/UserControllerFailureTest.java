@@ -19,14 +19,14 @@ class UserControllerFailureTest {
   private TestRestTemplate restTemplate;
 
   @Test
-  @DisplayName("Failure - Get user by id 2 - return 404 not found")
+  @DisplayName("Failure - Get user by id 99 - return 404 not found")
   void getByIdNotFound() {
     ResponseEntity<ErrorResponse> errorResponse = restTemplate.getForEntity(
-      "/user/2",
+      "/user/99",
       ErrorResponse.class
     );
     assertEquals(HttpStatus.NOT_FOUND, errorResponse.getStatusCode());
-    assertEquals("User id 2 not found", errorResponse.getBody().getMessage());
+    assertEquals("User id 99 not found", errorResponse.getBody().getMessage());
   }
 
   @Test
@@ -39,6 +39,26 @@ class UserControllerFailureTest {
     assertEquals(HttpStatus.BAD_REQUEST, errorResponse.getStatusCode());
     assertEquals(
       "Failed to convert value of type 'java.lang.String' to required type 'int'; For input string: \"invalid\"",
+      errorResponse.getBody().getMessage()
+    );
+  }
+
+  @Test
+  @DisplayName(
+    "Failure - Create user with duplicate fname - return 400 bad request"
+  )
+  void createDuplicateFname() {
+    UserRequest userRequest = new UserRequest();
+    userRequest.setFname("Duplicate");
+    restTemplate.postForEntity("/user", userRequest, ErrorResponse.class);
+    ResponseEntity<ErrorResponse> errorResponse = restTemplate.postForEntity(
+      "/user",
+      userRequest,
+      ErrorResponse.class
+    );
+    assertEquals(HttpStatus.BAD_REQUEST, errorResponse.getStatusCode());
+    assertEquals(
+      "Firstname is duplicated",
       errorResponse.getBody().getMessage()
     );
   }

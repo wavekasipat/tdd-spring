@@ -43,10 +43,10 @@ class UserServiceTest {
     Exception exception = assertThrows(
       UserNotFoundException.class,
       () -> {
-        userService.get(2);
+        userService.get(99);
       }
     );
     // Assert
-    assertEquals("User id 2 not found", exception.getMessage());
+    assertEquals("User id 99 not found", exception.getMessage());
   }
 }

@@ -1,5 +1,6 @@
 package com.example.day1.user;
 
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +26,18 @@ public class UserService {
     return userResponse;
   }
 
+  @Transactional
   public UserResponse create(UserRequest userRequest) {
+    // check firstname duplicate
+    if (userRepository.existsByFirstName(userRequest.getFname())) {
+      throw new DuplicatedUserFirstnameException();
+    }
+
     MyUser user = new MyUser();
     user.setFirstName(userRequest.getFname());
     user.setLastName(userRequest.getLname());
     user.setAge(userRequest.getAge());
-    user = userRepository.save(user);
+    user = userRepository.saveAndFlush(user);
     System.out.println(user);
 
     UserResponse userResponse = new UserResponse();

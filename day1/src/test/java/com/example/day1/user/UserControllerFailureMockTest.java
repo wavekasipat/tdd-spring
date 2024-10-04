@@ -1,6 +1,7 @@
 package com.example.day1.user;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import com.example.day1.global.ErrorResponse;
@@ -28,13 +29,39 @@ class UserControllerFailureMockTest {
   void getByIdNotFound() {
     // Arrange
     when(userService.get(2)).thenThrow(new UserNotFoundException(2));
+
     // Act
     ResponseEntity<ErrorResponse> errorResponse = restTemplate.getForEntity(
       "/user/2",
       ErrorResponse.class
     );
+
     // Assert
     assertEquals(HttpStatus.NOT_FOUND, errorResponse.getStatusCode());
     assertEquals("User id 2 not found", errorResponse.getBody().getMessage());
+  }
+
+  @Test
+  @DisplayName("Failure - Mock - Create duplicated user - return 400")
+  void createDuplicatedUser() {
+    // Arrange
+    when(userService.create(any()))
+      .thenThrow(new DuplicatedUserFirstnameException());
+
+    // Act
+    UserRequest userRequest = new UserRequest();
+    userRequest.setFname("John");
+    ResponseEntity<ErrorResponse> errorResponse = restTemplate.postForEntity(
+      "/user",
+      userRequest,
+      ErrorResponse.class
+    );
+
+    // Assert
+    assertEquals(HttpStatus.BAD_REQUEST, errorResponse.getStatusCode());
+    assertEquals(
+      "Firstname is duplicated",
+      errorResponse.getBody().getMessage()
+    );
   }
 }

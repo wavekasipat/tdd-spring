@@ -1,7 +1,6 @@
 package com.example.day1.user;
 
 import jakarta.validation.Valid;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,7 @@ public class UserController {
 
   @PostMapping("/user")
   public UserResponse createNewUser(
-          @Valid @RequestBody UserRequest userRequest
+    @Valid @RequestBody UserRequest userRequest
   ) {
     System.out.println(userRequest);
     return userService.create(userRequest);

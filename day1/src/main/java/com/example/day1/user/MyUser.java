@@ -1,6 +1,5 @@
 package com.example.day1.user;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -12,7 +11,7 @@ public class MyUser {
   @GeneratedValue
   private Long id;
 
-//   @Column(unique = true)
+  //   @Column(unique = true)
   private String firstName;
 
   private String lastName;

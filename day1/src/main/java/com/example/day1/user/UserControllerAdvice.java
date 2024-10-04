@@ -20,4 +20,17 @@ public class UserControllerAdvice {
       HttpStatus.NOT_FOUND
     );
   }
+
+  // handle DuplicatedUserFirstnameException
+  @ExceptionHandler(DuplicatedUserFirstnameException.class)
+  public ResponseEntity<ErrorResponse> handleDuplicatedUserFirstnameException(
+    DuplicatedUserFirstnameException ex
+  ) {
+    ErrorResponse errorResponse = new ErrorResponse();
+    errorResponse.setMessage(ex.getMessage());
+    return new ResponseEntity<ErrorResponse>(
+      errorResponse,
+      HttpStatus.BAD_REQUEST
+    );
+  }
 }
