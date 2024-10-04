@@ -19,7 +19,7 @@ class UserControllerSuccessTest {
   private UserRepository userRepository;
 
   @Test
-  @DisplayName("Sucess - Get User by Id")
+  @DisplayName("Success - Get User by Id")
   void getById() {
     // Arrange
     MyUser dummy = new MyUser();
@@ -38,5 +38,28 @@ class UserControllerSuccessTest {
     assertEquals("John", userResponse.getFname());
     assertEquals("Doe", userResponse.getLname());
     assertEquals(1, userResponse.getId());
+  }
+
+  @Test
+  @DisplayName("Success - Create User")
+  void createUser() {
+    // Arrange
+    UserRequest userRequest = new UserRequest();
+    userRequest.setFname("Jane");
+    userRequest.setLname("Doe");
+    userRequest.setAge(30);
+
+    // Act
+    UserResponse userResponse = restTemplate.postForObject(
+      "/user",
+      userRequest,
+      UserResponse.class
+    );
+
+    // Assert
+    assertEquals(2, userResponse.getId());
+    assertEquals("Jane", userResponse.getFname());
+    assertEquals("Doe", userResponse.getLname());
+    assertEquals(30, userResponse.getAge());
   }
 }

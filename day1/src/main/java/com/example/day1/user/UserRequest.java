@@ -1,10 +1,13 @@
 package com.example.day1.user;
 
-public class UserResponse {
+import jakarta.validation.constraints.NotBlank;
 
+public class UserRequest {
+
+  @NotBlank
   private String fname;
+
   private String lname;
-  private int id;
   private int age;
 
   public void setFname(String fname) {
@@ -23,14 +26,6 @@ public class UserResponse {
     return lname;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public int getId() {
-    return id;
-  }
-
   public void setAge(int age) {
     this.age = age;
   }
@@ -42,15 +37,13 @@ public class UserResponse {
   @Override
   public String toString() {
     return (
-      "UserResponse{" +
+      "UserRequest{" +
       "fname='" +
       fname +
       '\'' +
       ", lname='" +
       lname +
       '\'' +
-      ", id=" +
-      id +
       ", age=" +
       age +
       '}'
