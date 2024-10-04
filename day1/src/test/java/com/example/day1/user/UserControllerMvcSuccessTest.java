@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.example.day1.post.PostGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,9 @@ class UserControllerMvcSuccessTest {
 
   @MockBean
   private UserService userService;
+
+  @MockBean
+  private PostGateway postGateway;
 
   @Test
   @DisplayName("Success - Get user by ID")

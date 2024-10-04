@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.example.day1.global.ErrorResponse;
+import com.example.day1.post.PostGateway;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ class UserControllerMvcFailureTest {
 
   @MockBean
   private UserService userService;
+
+  @MockBean
+  private PostGateway postGateway;
 
   @Test
   void getByIdNotFound() throws Exception {

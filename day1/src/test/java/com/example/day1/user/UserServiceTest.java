@@ -2,6 +2,7 @@ package com.example.day1.user;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
